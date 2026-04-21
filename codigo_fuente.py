@@ -1,28 +1,28 @@
 # Módulo inicial de procesamiento de ventas
-def p(d):
+def procesar_registros(registros):
     # Esta función hace muchas cosas a la vez
     res = []
-    for i in d:
+    for registro in registros:
         # Comprobar si es una venta válida
-        if i['tipo'] == 'venta' and i['monto'] > 0 and i['estado'] == 'completado':
+        if registro['tipo'] == 'venta' and registro['monto'] > 0 and registro['estado'] == 'completado':
             # Aplicar descuento si el monto es alto o es cliente VIP
-            if i['monto'] > 1000 or (i['cliente_tipo'] == 'VIP' and i['monto'] > 500):
-                f = i['monto'] * 0.9
+            if registro['monto'] > 1000 or (registro['cliente_tipo'] == 'VIP' and registro['monto'] > 500):
+                montoFinal = registro['monto'] * 0.9
             else:
-                f = i['monto']
+                montoFinal = registro['monto']
             
             # Formatear el resultado
-            s = "Cliente: " + i['nombre'] + " - Total: " + str(f)
-            res.append(s)
+            resultado = "Cliente: " + registro['nombre'] + " - Total: " + str(montoFinal)
+            res.append(resultado)
             
             # Imprimir log de auditoría (duplicado innecesario)
-            print("Procesando registro de: " + i['nombre'])
-        elif i['tipo'] == 'devolucion' and i['monto'] > 0:
+            print("Procesando registro de: " + registro['nombre'])
+        elif registro['tipo'] == 'devolucion' and registro['monto'] > 0:
             # Lógica de devoluciones mezclada
-            f = i['monto'] * -1
-            s = "Cliente: " + i['nombre'] + " - Retorno: " + str(f)
-            res.append(s)
-            print("Procesando registro de: " + i['nombre'])
+            montoFinal = registro['monto'] * -1
+            resultado = "Cliente: " + registro['nombre'] + " - Retorno: " + str(montoFinal)
+            res.append(resultado)
+            print("Procesando registro de: " + registro['nombre'])
             
     return res
 
@@ -33,4 +33,4 @@ datos_sucios = [
     {'tipo': 'devolucion', 'monto': 50, 'estado': 'completado', 'cliente_tipo': 'estándar', 'nombre': 'Pedro'}
 ]
 
-print(p(datos_sucios))
+print(procesar_registros(datos_sucios))

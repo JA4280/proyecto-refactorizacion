@@ -4,7 +4,7 @@ def procesar_registros(registros):
     res = []
     for registro in registros:
         # Comprobar si es una venta válida
-        if registro['tipo'] == 'venta' and registro['monto'] > 0 and registro['estado'] == 'completado':
+        if validarVenta(registro):
             # Aplicar descuento si el monto es alto o es cliente VIP
             if registro['monto'] > 1000 or (registro['cliente_tipo'] == 'VIP' and registro['monto'] > 500):
                 montoFinal = registro['monto'] * 0.9
@@ -25,6 +25,9 @@ def procesar_registros(registros):
             print("Procesando registro de: " + registro['nombre'])
             
     return res
+
+def validarVenta(registro):
+    return registro['tipo'] == 'venta' and registro['monto'] > 0 and registro['estado'] == 'completado'
 
 # Datos de prueba para verificar que funciona
 datos_sucios = [

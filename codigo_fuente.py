@@ -6,10 +6,12 @@ def procesar_registros(registros):
         # Comprobar si es una venta válida
         if validarVenta(registro):
             # Aplicar descuento si el monto es alto o es cliente VIP
-            if registro['monto'] > 1000 or (registro['cliente_tipo'] == 'VIP' and registro['monto'] > 500):
-                montoFinal = registro['monto'] * 0.9
+            monto = registro['monto']
+            esVip = registro['cliente_tipo'] == 'VIP'
+            if monto > 1000 or (esVip and registro['monto'] > 500):
+                montoFinal = monto * 0.9
             else:
-                montoFinal = registro['monto']
+                montoFinal = monto
             
             # Formatear el resultado
             resultado = "Cliente: " + registro['nombre'] + " - Total: " + str(montoFinal)

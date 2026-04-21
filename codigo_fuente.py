@@ -9,7 +9,9 @@ def procesar_registros(registros):
     - Genera un resumen formateado del resultado
 
     Parámetros:
-    registros (list): Lista de diccionarios con información de ventas y devoluciones.   
+    registros (list): Lista de diccionarios con información de ventas y devoluciones.
+    Retorna:
+    list: Lista de resultados formateados con el total de cada cliente.
     """
     # Lista donde se almacenan los resultados finales
     res = []
@@ -44,7 +46,9 @@ def validarVenta(registro):
     """
     Valida si un registro corresponde a una venta válida.
     Un registro es considerado una venta válida si:- El tipo es 'venta'    - El monto es mayor a 0    - El estado es 'completado'  
-   
+    parametro:
+    registro (dict): Diccionario con información de un registro de venta o devolución. 
+    Retorna:bool: True si el registro es una venta válida, False en caso contrario.
     """
     return registro['tipo'] == 'venta' and registro['monto'] > 0 and registro['estado'] == 'completado'
 
